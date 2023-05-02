@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'users_app',
     'crispy_forms',
     'crispy_bootstrap5' ,
+    'taskmate'
 ]
 
 MIDDLEWARE = [
