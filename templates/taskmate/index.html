@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class = "container m-4">
+
+
+
+  {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>   
+  {% endif %}
+
+
+  <form method = "POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <input type="text" class="form-control" name = "task" placeholder = "New Task?">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+
+<div class = "container m-4">
+  <table class="table table-striped">
+
+
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Task</th>
+        <th scope="col">Done</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+
+<tbody>
+  {% for i in all_tasks%}
+    <tr>
+      <th>{{i.id}}</th>
+      <td>{{i.task}}</td>
+          {%if i.done %}
+          <td>
+              <a href = "{% url 'done' i.id %}" type="button" class="btn btn-success">Completed</button>
+          </td>
+          {%else%}
+          <td>
+              <a href = "{% url 'done' i.id %}" type="button" class="btn btn-warning">Not Completed</button>
+          </td>
+          {%endif%}
+      <td><a href="{% url 'edit' i.id %}" class="btn btn-primary">Edit</a></td>
+      <td><a href = "{% url 'delete' i.id %}" class="btn btn-danger">Delete</a></td>
+    </tr>
+  {%endfor%}
+</tbody>
+</table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="?pg=1"><<</a></li>
+    {% if all_tasks.has_previous %}
+    <li class="page-item"><a class="page-link" href="?pg= {{all_tasks.previous_page_number}} ">{{all_tasks.previous_page_number}}</a></li>
+    {% endif %}
+    {% if all_tasks.has_next %}
+    <li class="page-item"><a class="page-link" href="?pg={{ all_tasks.next_page_number }}">{{all_tasks.next_page_number}}</a></li>
+    {% endif %}
+    <li class="page-item"><a class="page-link" href="?pg= {{all_tasks.paginator.num_pages}}">>></a></li>
+  </ul>
+</nav>
+</div>
+
+  {% endblock content %}
