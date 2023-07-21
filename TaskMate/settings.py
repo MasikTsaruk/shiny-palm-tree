@@ -1,10 +1,5 @@
 
 from pathlib import Path
-import environ 
-import os 
-
-env = environ.Env()
-environ.Env.read_env()
 
 
 
@@ -16,10 +11,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY =  env('DJANGO_SECRET_KEY')
+SECRET_KEY =  'django-insecure-7yki=jpwu5u1nzg-kvll2$e3$%x@zm^!67%_#v@%lsv+#twk*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -76,11 +71,11 @@ WSGI_APPLICATION = 'TaskMate.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DJANGO_DB_NAME'),
-        'USER': env('DJANGO_DB_USER'),
-        'PASSWORD': env('DJANGO_DB_PASSWORD'),
-        'HOST': env('DJANGO_DB_HOST'),
-        'PORT': env('DJANGO_DB_PORT'),
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'rEset237?',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

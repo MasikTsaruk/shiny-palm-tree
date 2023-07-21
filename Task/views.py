@@ -1,5 +1,4 @@
 from django.shortcuts import render,redirect
-#from .forms import TaskForm
 from django.http import HttpResponseRedirect
 from .models import TaskList
 from .forms import TaskForm
